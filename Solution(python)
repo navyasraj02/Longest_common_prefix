@@ -1,0 +1,29 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:    
+        def isCommonprefix(strs,len1):     
+            str1=strs[0][:(len1)+1]        
+           
+            for i in range(len(strs)):       
+                if not strs[i].startswith(str1):       
+                    return False                      
+            return True                     
+            
+        minlen=2**31
+        if len(strs)==0:        
+            return ""
+        for i in strs:
+            minlen=min(minlen,len(i))           
+        low=1
+        high=minlen 
+        
+        while (low<=high):   
+            mid=low+high//2          
+            if isCommonprefix(strs,mid):      
+                low=mid+1             
+            else:                    
+                high=mid-1            
+               
+        
+        return strs[0][:int((low+high) / 2)+1]   
+            
+            
